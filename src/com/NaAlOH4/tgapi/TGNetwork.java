@@ -1,7 +1,6 @@
 package com.NaAlOH4.tgapi;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -21,7 +20,6 @@ import com.google.gson.Gson;
  */
 final class TGNetwork {
     private final String url;
-    private final String token;
     private final OkHttpClient client;
     private final OkHttpClient longClient;
     private final Gson gson;
@@ -32,7 +30,6 @@ final class TGNetwork {
 
     TGNetwork(@NotNull String token,
               @NotNull String url) {
-        this.token = token;
         this.url = url;
         @NotNull Proxy proxy = Main.config.proxy.getProxy();
         client = new OkHttpClient.Builder()
@@ -46,27 +43,32 @@ final class TGNetwork {
 
     /**
      * @param method example: getMe, sendMessage, deleteMessage ...
-     * @param args
-     * @return
+     * @param parameter is send by http POST method.
+     * @return Result should read by readResult()
      */
     public Result request(@NotNull String method,
-                              @Nullable Map<String, String> args,
+                              @Nullable Map<String, Object> parameter,
                           boolean longPull) throws IOException {
         FormBody.Builder updateFormBody = new FormBody.Builder();
-        if(args != null) {
-            for(final Map.Entry<String, String> entry : args.entrySet())
-                updateFormBody.add(entry.getKey(), entry.getValue());
+        if(parameter != null) {
+            for (final Map.Entry<String, Object> entry : parameter.entrySet())
+                if (entry.getValue() != null)
+                    updateFormBody.add(entry.getKey(), String.valueOf(entry.getValue()));
         }
         Request request = new Request.Builder()
                 .url(url + method)
                 .post(updateFormBody.build())
                 .build();
         Response response = (longPull ? longClient : client).newCall(request).execute();
-        return gson.fromJson(response.body().string(), Result.class);
+        try {
+            return gson.fromJson(response.body().string(), Result.class);
+        }catch (NullPointerException e){
+            throw new IOException(e);
+        }
     }
 
     public Result request(@NotNull String method,
-                          @Nullable Map<String, String> args) throws IOException {
+                          @Nullable Map<String, Object> args) throws IOException {
         return request(method, args, false);
     }
 }

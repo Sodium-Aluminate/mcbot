@@ -25,7 +25,7 @@ test pyCraft:
 python3 ./start.py --server [your minecraft server] --user [your account id or email] -p [password]
 ```
 
-**warning: your password will be written in bash history, see `man bash` to avoid it.**
+**warning: your password will be saved in bash history, see `man bash` to avoid it.**
 
 edit example config, then save it in `[you home dir]/.config/mcbot.json`.
 All keys named help is unnecessary.

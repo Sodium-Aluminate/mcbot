@@ -27,7 +27,7 @@ public class McBot {
                     if (!text.startsWith("/")) return;
                     text = text.substring(1);
                     Me me = telegram.getMe();
-                    if (me != null) text = text.replaceAll("@" + telegram.getMe().username + "\b", "");
+                    if (me != null) text = text.replaceAll("@" + telegram.getMe().username+"$", "");
 
                     // handle "list" command
                     if (text.equalsIgnoreCase("list")) {

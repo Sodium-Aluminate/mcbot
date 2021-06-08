@@ -1,0 +1,42 @@
+{
+  "help_users": "Array of User Object",
+  "help_user": "WARNING: if your user information have any character like \", |, `, &, or etc, you will be command inject (we will fix this issue later)",
+  "users": [
+    {
+      "name": "bot_ghast_farm",
+      "mail": "prprYuuta@NaAlOH4.com",
+      "pass": "balabala"
+    },{
+      "name": "bot_guardian",
+      "mail": "prprNaAlOH4@Yuuta.moe",
+      "pass": "2Ts2Ka3cU7VjdQ6Q"
+    }
+  ],
+  "help_server": "your mc server.",
+  "server": "1.1.1.1",
+  "help_token": "the bot's token. you can get it from @BotFather",
+  "token": "498633413:5L2g5LiN5Lya5Lul5Li66ZOd566U5pivYm905ZCn",
+
+  "help_python": "the path of the python and script, fill \"python3\" or \"python\" if you have no idea where python is.",
+  "pythonCommand": "/usr/bin/python3",
+  "scriptPath": "/home/sodiumaluminate/pyCraft/start.py",
+
+  "help_allowList": "you can use both allowGroup(a Group Object) and allowGroups(a Array of Group Object)",
+  "allowGroup": {
+    "id": -1001234567890
+  },
+  "admins": [
+  {
+    "id": 498633413
+  }
+],
+  "help_proxy": "can be socks5 or http",
+  "proxy": {
+    "type": "socks5",
+    "address": "127.0.0.1",
+    "port": 1080
+  },
+  "help_stdout": "print these info can help you debug... maybe.",
+  "printDebugInfo": true,
+  "printTelegramInfo": true
+}
